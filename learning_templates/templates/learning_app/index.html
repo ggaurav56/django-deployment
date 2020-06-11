@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+{% extends "learning_app/base.html" %}
+{% load my_templates %}
+  {% block body_block %}
+  <h1>Welcome to Index</h1>
+  <h2>Example of template inhertance</h2>
+  <h1>{{ text|cut:'hello' }}</h1>
+  <h1>{{ number|add:"99" }}</h1>
+    {% endblock %}
