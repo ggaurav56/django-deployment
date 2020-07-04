@@ -1,0 +1,30 @@
+{% extends 'cbv_app/base.html' %}
+
+{% block bodyblock %}
+
+<h1>Welcome to list of all Books</h1>
+<table class="table">
+  <tr>
+    <thead class="thead-light">
+        <tr>
+
+          <th scope="col">NAME</th>
+          <th scope="col">ISBN</th>
+          <th scope="col">Update</th>
+          <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for book in books %}
+      <tr>
+        <td> <a href="{% url 'cbv_app:detail' pk=book.id %}">{{book.name}}</a></td>
+        <td>{{book.isbn}}</td>
+        <td><p><a class="btn btn-warning" href="{% url 'cbv_app:update' pk=book.id %}">Update</a></p></td>
+        <td><p><a class="btn btn-danger" href="{% url 'cbv_app:delete' pk=book.id %}">Delete</a></p></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </tr>
+</table>
+
+{% endblock %}

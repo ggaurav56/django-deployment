@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title></title>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-static-top">
+      <ul class="nav navbar-nav">
+          <li><a class="navbar-brand" href="{% url 'cbv_app:list' %}">Schools</a></li>
+          <li><a href="{% url 'cbv_app:create' %}" class="navbar-item">Create</a></li>
+      </ul>
+    </nav>
+    <div class="container">
+      {% block bodyblock %}
+
+      {% endblock %}
+    </div>
+  </body>
+</html>
