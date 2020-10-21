@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block bodyblock %}
+  <h1>Thank You</h1>
+  <div>
+    <p>Your order has been successfully completed. Your order number is <strong>{{ order.id }}</strong>.</p>
+  </div>
+{% endblock bodyblock %}
