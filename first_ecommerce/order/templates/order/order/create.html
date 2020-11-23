@@ -26,9 +26,39 @@
   </div>
   <div class="">
   <form action="{% url 'order:created' %}" method="post" class="">
-    {{ form|crispy }}
-    <p><input type="submit" value="Place order" class="btn btn-success"></p>
     {% csrf_token %}
+    <div class="form-row">
+      <div class="form-group col-md-6 mb-0">
+        {{ form.name|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-6 mb-0">
+        {{ form.phone|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-12 mb-0">
+        {{ form.email|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-6 mb-0">
+        {{ form.address1|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-6 mb-0">
+        {{ form.address2|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-6 mb-0">
+        {{ form.city|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-6 mb-0">
+        {{ form.postal_code|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-6 mb-0">
+        {{ form.state|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-6 mb-0">
+        <label for="country">Country*</label>
+        <input class="form-control" type="text" placeholder="India" id="country" readonly>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success col-md-12 mb-0"> Place Order</button>  
   </form>
+<br>
 </div>
 {% endblock bodyblock %}

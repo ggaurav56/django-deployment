@@ -1,17 +1,20 @@
 from django import forms
 from django.contrib.auth.models import Group
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.utils.translation import ugettext_lazy as _
 
-from .models import Account
+
+from .models import Account,Address
 
 
 class RegistrationForm(forms.ModelForm):
     # password = forms.CharField(label='Password', widget=forms.PasswordInput)
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
     class Meta:
         model = Account
         fields = ('email', 'name', 'phone', 'password1','password2')
+        labels = {'phone': _('Mobile Number'),}
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -67,3 +70,17 @@ class UserChangeForm(forms.ModelForm):
         # This is done here, rather than on the field, because the
         # field does not have access to the initial value
         return self.initial["password"]
+
+
+
+#address create form
+class AddressCreateForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        fields = ['full_name', 'phone', 'email', 'address1','address2', 
+                  'postal_code', 'city','state',]
+                  
+        labels = {'full_name':_('Full Name'),
+                  'phone': _('Mobile Number'),
+                  'address1': _('Flat/House and Society'),
+                  'address2': _('Locality')}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block bodyblock %}
+
+<div class="order-history">
+<h1>Order History</h1>
+{% for order in order_details %}
+<table class="table table-striped">
+  <tr style="border:solid;">
+    <td><strong>Order Number : </strong>{{order.id}}</td>
+    <td colspan=""><strong>Product Name</strong></td>
+    <td><strong>Unit Price</strong></td>
+    <td><strong>Quantity</strong></td>
+    <td><strong>Total</strong></td>
+  
+  
+  {% for item in order.items.all  %}
+    <tr style="border:solid;">
+      <td> {{item.image}} </td>
+      <td> {{item.product.title}} </td>
+      <td> {{item.price}} </td>
+      <td> {{item.quantity}} </td>
+      <td> {{item.get_cost}} </td>
+    </tr>
+  {% endfor %}
+    <tr style="border:solid;">
+    <td><strong>Placed on:</strong> {{order.created}}</td>
+    <td colspan="3"></td>
+    <td><strong>Total Amount:</strong> {{order.get_total_cost}}</td>
+    </tr>
+</tr> 
+
+
+</table>
+{% endfor %} 
+</div>
+
+{% endblock bodyblock %}
+
+    
+

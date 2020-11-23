@@ -6,8 +6,8 @@ class OrderItemInline(admin.TabularInline):
     raw_id_fields = ['product']
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id', 'first_name', 'last_name', 'email', 
-                    'address', 'postal_code', 'city','state', 'paid', 
+    list_display = ['id', 'name', 'phone', 'email', 
+                    'postal_code', 'city','state', 'paid', 
                     'created', 'updated']
     list_filter = ['paid', 'created', 'updated']
     inlines = [OrderItemInline]

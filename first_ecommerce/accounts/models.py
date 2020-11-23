@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.contrib.auth import get_user_model
 from django.utils import timezone
+from django.urls import reverse
+
 
 
 class AccountManager(BaseUserManager):
@@ -45,8 +47,8 @@ class AccountManager(BaseUserManager):
 class Account(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=150)
-    phone = models.CharField(max_length=50)
-
+    phone = models.CharField(max_length=50,unique=True)
+    
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
@@ -62,3 +64,65 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return self.name.split()[0]
+
+states =(
+    ('','Choose...'),
+    ('AN','Andaman and Nicobar Islands'),
+    ('AP','Andhra Pradesh'),
+    ('AR','Arunachal Pradesh'),
+    ('AS','Assam'),
+    ('BR','Bihar'),
+    ('CH','Chandigarh'),
+    ('CG','Chhattisgarh'),
+    ('DD','Dadra and Nagar Haveli and Daman and Diu'),
+    ('DL','Delhi'),
+    ('GA','Goa'),
+    ('GJ','Gujarat'),
+    ('HR','Haryana'),
+    ('HP','Himachal Pradesh'),
+    ('JK','Jammu and Kashmir'),
+    ('JH','Jharkhand'),
+    ('KA','Karnataka'),
+    ('KL','Kerala'),
+    ('LA','Ladakh'),
+    ('LD','Lakshadweep'),
+    ('MP','Madhya Pradesh'),
+    ('MH','Maharashtra'),
+    ('MN','Manipur'),
+    ('ML','Meghalaya'),
+    ('MZ','Mizoram'),
+    ('NL','Nagaland'),
+    ('OD','Odisha'),
+    ('PY','Puducherry'),
+    ('PB','Punjab'),
+    ('RJ','Rajasthan'),
+    ('SK','Sikkim'),
+    ('TN','Tamil Nadu'),
+    ('TS','Telangana'),
+    ('TR','Tripura'),
+    ('UP','Uttar Pradesh'),
+    ('UK','Uttarakhand'),
+    ('WB','West Bengal'),
+
+)
+
+class Address(models.Model):
+    account = models.ForeignKey(Account,on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=256)
+    phone = models.CharField(max_length=50)
+    email = models.EmailField()
+    address1 = models.CharField(max_length=250)
+    address2 = models.CharField(max_length=250)
+    postal_code = models.CharField(max_length=7)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100,choices=states,default='')
+    country = models.CharField(max_length=156, default='India', editable=False)
+
+    def __str__(self):
+        return self.full_name
+
+    def get_absolute_url(self):
+        return reverse("accounts:address_list", kwargs={"email": self.user.email,'pk':self.pk})
+
+    def save(self,*args,**kwargs):
+        super().save(*args,**kwargs)

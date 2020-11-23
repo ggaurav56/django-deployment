@@ -8,12 +8,13 @@
         <div class="row">
             {% for product in products %}
             <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                  <a href=" {% url 'products:detail' slug=product.slug %} "><img src=" media/{{product.image}} " alt=" {{product.title}} "></a>
-                  <div class="caption">
+                <div class="thumbnail" style="text-align: center;">
+                  <a href="{% url 'products:detail' slug=product.slug %}"><img src=" media/{{product.image1}} " alt=" {{product.title}} " height="100%" width="100%"></a>
+                  <div class="caption" >
                     <h3> {{product.title}} </h3>
                  
-                    <p><label for="">Rs.{{product.price}}</label> <a href="#" class="btn btn-success" role="button">Add to Cart</a></p>
+                    <p><strong>Rs.{{product.price}}</strong></p>
+                    
                   </div>
                 </div>
               </div>   

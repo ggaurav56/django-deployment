@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block bodyblock %}
+
+  <h1>Hello in Address List</h1>
+
+{% for address in address_list %}
+<div class="">
+<div class="card">
+  <div class="card-header">
+    <h3>Your Address</h3>
+  </div>
+  <div class="card-body">
+    <h4 class="card-title">{{ address.full_name }}</h4>
+    
+    {{ address.phone }}
+    {{ address.address1 }}
+    {{ address.address2 }}
+    {{ address.city }}  
+  </div>
+  <div class="card-footer">
+    <h6> <a href="{% url 'accounts:address_update' address.id %}"> Update your Address </a></h6>
+    <h6><a href=" {% url 'accounts:address_delete' address.id %} ">Delete?</a></h6>
+  </div>
+</div>
+</div>
+{% endfor %}
+<a href="{% url 'accounts:create_address' %} ">Want to create new address</a>
+  {% endblock bodyblock %}

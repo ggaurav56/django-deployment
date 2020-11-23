@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block bodyblock %}
+ 
+ <div class="container">
+    <div class="row">
+        {% for product in user.favorites.all %}
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail" style="text-align: center;">
+              <a href="{% url 'products:detail' slug=product.slug %}"><img src="/media/{{product.image1}} " alt=" {{product.title}} " height="100%" width="100%"></a>
+              <div class="caption" >
+                <h3> {{product.title}} </h3>
+             
+                <p><strong>Rs.{{product.price}}</strong></p>
+                
+              </div>
+            </div>
+          </div>   
+        {% endfor %}
+    </div>
+</div>
+{% endblock bodyblock %}
